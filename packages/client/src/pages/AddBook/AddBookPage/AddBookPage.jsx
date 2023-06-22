@@ -2,9 +2,11 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 
-import { ADD_BOOK_MUTATION } from './mutations/addBook.mutation';
-import { GET_BOOKS_QUERY } from '../../Books/BooksPage/queries/getBooks.query';
-import { GET_AUTHORS_QUERY } from '../../Index/IndexPage/queries/getAuthors.query';
+import {
+  ADD_BOOK_MUTATION,
+  GET_BOOKS_QUERY,
+  GET_AUTHORS_QUERY,
+} from '../../../queries';
 
 import * as S from './AddBookPage.styled';
 

@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/client';
 
 import BooksTable from './BooksTable/BooksTable';
 
-import { GET_BOOKS_QUERY } from './queries/getBooks.query';
+import { GET_BOOKS_QUERY } from '../../../queries';
 
 import * as S from './BooksPage.styled';
 
