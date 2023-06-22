@@ -5,6 +5,7 @@ import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import App from './App.jsx';
 import IndexPage from './pages/Index/IndexPage/IndexPage';
 import BooksPage from './pages/Books/BooksPage/BooksPage';
+import AddBookPage from './pages/AddBook/AddBookPage/AddBookPage.jsx';
 
 const client = new ApolloClient({
   uri: 'http://localhost:4000',
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
       {
         path: '/books',
         element: <BooksPage />,
+      },
+      {
+        path: '/add-book',
+        element: <AddBookPage />,
       },
     ],
   },

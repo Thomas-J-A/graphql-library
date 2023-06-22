@@ -12,6 +12,9 @@ const MainNav = () => {
         <S.NavItem>
           <Link to={`/books`}>Books</Link>
         </S.NavItem>
+        <S.NavItem>
+          <Link to={`/add-book`}>Add Book</Link>
+        </S.NavItem>
       </S.NavList>
     </S.MainNav>
   );
