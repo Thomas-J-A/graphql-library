@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/client';
 
 import AuthorsTable from './AuthorsTable/AuthorsTable';
 
-import { GET_AUTHORS_QUERY } from './queries/get-authors.query';
+import { GET_AUTHORS_QUERY } from './queries/getAuthors.query';
 
 import * as S from './IndexPage.styled';
 

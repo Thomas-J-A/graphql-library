@@ -1,3 +1,5 @@
+import * as S from './AuthorsTable.styled';
+
 const AuthorsTable = ({ authors }) => {
   const authorRows = authors.map((a) => (
     <tr key={a.name}>
@@ -11,9 +13,9 @@ const AuthorsTable = ({ authors }) => {
     <table>
       <tbody>
         <tr>
-          <th>Name</th>
-          <th>Born</th>
-          <th>Book Count</th>
+          <S.TableHeader>Name</S.TableHeader>
+          <S.TableHeader>Born</S.TableHeader>
+          <S.TableHeader>Book Count</S.TableHeader>
         </tr>
         {authorRows}
       </tbody>
