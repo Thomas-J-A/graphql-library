@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/client';
 
 import AuthorsTable from './AuthorsTable/AuthorsTable';
+import UpdateBirthYearForm from './UpdateBirthYearForm/UpdateBirthYearForm';
 
 import { GET_AUTHORS_QUERY } from '../../../queries';
 
@@ -17,6 +18,8 @@ const IndexPage = () => {
     <S.IndexPage>
       <S.Title>Authors</S.Title>
       <AuthorsTable authors={data.allAuthors} />
+      <S.Subtitle>Set Birthyear</S.Subtitle>
+      <UpdateBirthYearForm />
     </S.IndexPage>
   );
 };
