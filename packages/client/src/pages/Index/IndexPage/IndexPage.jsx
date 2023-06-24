@@ -19,7 +19,7 @@ const IndexPage = () => {
       <S.Title>Authors</S.Title>
       <AuthorsTable authors={data.allAuthors} />
       <S.Subtitle>Set Birthyear</S.Subtitle>
-      <UpdateBirthYearForm />
+      <UpdateBirthYearForm authors={data.allAuthors} />
     </S.IndexPage>
   );
 };

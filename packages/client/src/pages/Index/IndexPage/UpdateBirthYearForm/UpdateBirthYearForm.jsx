@@ -8,7 +8,7 @@ import {
   GET_AUTHORS_QUERY,
 } from '../../../../queries';
 
-const UpdateBirthYearForm = () => {
+const UpdateBirthYearForm = ({ authors }) => {
   const [name, setName] = useState('');
   const [year, setYear] = useState('');
   const { setNotificationMsg } = useContext(NotificationContext);
@@ -30,16 +30,23 @@ const UpdateBirthYearForm = () => {
     setYear('');
   };
 
+  const options = [
+    { value: '', label: '-- Choose an option --', disabled: true },
+    ...authors.map((a) => ({ value: a.name, label: a.name })),
+  ];
+
   return (
     <form onSubmit={handleSubmit}>
       <div>
         <label>
           Name:
-          <input
-            type="text"
-            value={name}
-            onChange={({ target }) => setName(target.value)}
-          />
+          <select value={name} onChange={({ target }) => setName(target.value)}>
+            {options.map((o, i) => (
+              <option key={i} value={o.value} disabled={o.disabled}>
+                {o.label}
+              </option>
+            ))}
+          </select>
         </label>
       </div>
       <div>
