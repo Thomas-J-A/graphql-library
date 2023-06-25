@@ -83,7 +83,7 @@ const resolvers = {
     },
     allAuthors: async (_, __, { models }) =>
       await models.Author.find({}).exec(),
-    me: async (_, __, { user }) => user,
+    me: (_, __, { user }) => user,
   },
   Mutation: {
     addBook: async (_, args, { user, models }) => {
