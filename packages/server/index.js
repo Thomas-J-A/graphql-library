@@ -68,7 +68,7 @@ const resolvers = {
     allAuthors: async () => await models.Author.find({}).exec(),
   },
   Mutation: {
-    addBook: async (_, args, context) => {
+    addBook: async (_, args) => {
       const authors = await models.Author.find({}).exec();
       // const isNewAuthor = !authors.some((a) => a.name === args.author);
       let author = authors.find((a) => a.name === args.author);
@@ -79,12 +79,31 @@ const resolvers = {
           name: args.author,
         });
 
-        await author.save();
+        try {
+          await author.save();
+        } catch (err) {
+          throw new GraphQLError('Error creating new author', {
+            extensions: {
+              code: 'BAD_USER_INPUT',
+              err,
+            },
+          });
+        }
       }
 
       // Add new book record to database
       const newBook = new models.Book({ ...args, author: author._id });
-      await newBook.save();
+
+      try {
+        await newBook.save();
+      } catch (err) {
+        throw new GraphQLError('Error creating new book', {
+          extensions: {
+            code: 'BAD_USER_INPUT',
+            err,
+          },
+        });
+      }
 
       return newBook;
     },
