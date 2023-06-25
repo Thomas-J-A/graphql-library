@@ -34,7 +34,7 @@ const typeDefs = `#graphql
 
   type Book {
     title: String
-    # author: Author
+    author: Author
     published: Int
     genres: [String]
   }
@@ -44,21 +44,27 @@ const resolvers = {
   Query: {
     authorCount: async () => await models.Author.countDocuments({}).exec(),
     bookCount: async () => await models.Book.countDocuments({}).exec(),
-    // allBooks: (_, args) => {
-    //   let filteredBooks = books;
+    allBooks: async (_, args) => {
+      let filteredBooks = await models.Book.find({})
+        .populate('author', 'name')
+        .exec();
 
-    //   if (args.author) {
-    //     filteredBooks = filteredBooks.filter((b) => b.author === args.author);
-    //   }
+      // Filter out any books with authors that don't match user's search value
+      if (args.author) {
+        filteredBooks = filteredBooks.filter(
+          (b) => b.author.name === args.author,
+        );
+      }
 
-    //   if (args.genre) {
-    //     filteredBooks = filteredBooks.filter((b) =>
-    //       b.genres.includes(args.genre),
-    //     );
-    //   }
+      // Filter out any books not in genre specified in search
+      if (args.genre) {
+        filteredBooks = filteredBooks.filter((b) =>
+          b.genres.includes(args.genre),
+        );
+      }
 
-    //   return filteredBooks;
-    // },
+      return filteredBooks;
+    },
     allAuthors: async () => await models.Author.find({}).exec(),
   },
   Mutation: {
@@ -82,27 +88,35 @@ const resolvers = {
 
       return newBook;
     },
-    // editAuthor: (_, args) => {
-    //   let authorToUpdate = authors.find((a) => a.name === args.name);
+    editAuthor: async (_, args) => {
+      const authorToUpdate = await models.Author.findOne({
+        name: args.name,
+      }).exec();
 
-    //   // Throw error is author not found
-    //   if (!authorToUpdate) {
-    //     throw new GraphQLError('Author does not exist', {
-    //       extensions: {
-    //         code: 'BAD_USER_INPUT',
-    //         invalidArgs: args.name,
-    //       },
-    //     });
-    //   }
+      // Throw error is author is not in database
+      if (!authorToUpdate) {
+        throw new GraphQLError('Author does not exist', {
+          extensions: {
+            code: 'BAD_USER_INPUT',
+          },
+        });
+      }
 
-    //   // Update author's born value
-    //   authorToUpdate.born = args.setBornTo;
+      // Update author doc
+      authorToUpdate.born = args.setBornTo;
+      await authorToUpdate.save();
 
-    //   return authorToUpdate;
-    // },
+      return authorToUpdate;
+    },
   },
   Author: {
-    // bookCount: (parent) => books.filter((b) => b.author === parent.name).length,
+    bookCount: async (parent) => {
+      const books = await models.Book.find({})
+        .populate('author', 'name')
+        .exec();
+
+      return books.filter((b) => b.author.name === parent.name).length;
+    },
   },
 };
 
