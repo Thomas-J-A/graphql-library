@@ -50,6 +50,7 @@ const AddBookPage = () => {
 
   return (
     <S.AddBookPage>
+      <S.Title>Add Book</S.Title>
       <form onSubmit={handleSubmit}>
         <div>
           <label>

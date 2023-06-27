@@ -13,6 +13,7 @@ import App from './App.jsx';
 import IndexPage from './pages/Index/IndexPage/IndexPage';
 import BooksPage from './pages/Books/BooksPage/BooksPage';
 import AddBookPage from './pages/AddBook/AddBookPage/AddBookPage';
+import RecommendationsPage from './pages/Recommendations/RecommendationsPage/RecommendationsPage';
 import LogInPage from './pages/LogIn/LogInPage/LogInPage';
 
 const authLink = new ApolloLink((operation, forward) => {
@@ -50,6 +51,10 @@ const router = createBrowserRouter([
       {
         path: '/add-book',
         element: <AddBookPage />,
+      },
+      {
+        path: '/recommendations',
+        element: <RecommendationsPage />,
       },
       {
         path: '/login',

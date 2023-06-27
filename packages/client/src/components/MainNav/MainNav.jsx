@@ -25,6 +25,9 @@ const MainNav = () => {
               <Link to={`/add-book`}>Add Book</Link>
             </S.NavItem>
             <S.NavItem>
+              <Link to={`/recommendations`}>Recommendations</Link>
+            </S.NavItem>
+            <S.NavItem>
               <LogOutButton />
             </S.NavItem>
           </>

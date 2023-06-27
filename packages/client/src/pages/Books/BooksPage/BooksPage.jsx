@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useQuery } from '@apollo/client';
 
-import BooksTable from './BooksTable/BooksTable';
+import BooksTable from '../../../components/BooksTable/BooksTable';
 import GenreFilter from './GenreFilter/GenreFilter';
 
 import { GET_BOOKS_QUERY } from '../../../queries';
