@@ -9,7 +9,9 @@ const BooksTable = ({ books }) => {
     </tr>
   ));
 
-  return (
+  return bookRows.length === 0 ? (
+    <p>There are no books matching this genre.</p>
+  ) : (
     <table>
       <tbody>
         <tr>

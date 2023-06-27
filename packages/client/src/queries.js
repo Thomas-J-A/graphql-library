@@ -18,6 +18,7 @@ export const GET_BOOKS_QUERY = gql`
       author {
         name
       }
+      genres
     }
   }
 `;
