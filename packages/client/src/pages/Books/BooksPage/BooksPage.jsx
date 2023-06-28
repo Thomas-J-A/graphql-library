@@ -12,7 +12,7 @@ const BooksPage = () => {
   const [selectedGenre, setSelectedGenre] = useState('');
   const { loading, error, data } = useQuery(GET_BOOKS_QUERY, {
     variables: { genre: selectedGenre },
-    fetchPolicy: 'network-only',
+    // fetchPolicy: 'network-only',
   });
 
   if (loading) return <p>Loading...</p>;
