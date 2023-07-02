@@ -41,6 +41,7 @@ export const ADD_BOOK_MUTATION = gql`
       author {
         name
       }
+      genres
     }
   }
 `;
@@ -63,6 +64,19 @@ export const LOG_IN_MUTATION = gql`
         favouriteGenre
       }
       token
+    }
+  }
+`;
+
+export const BOOK_ADDED_SUBSCRIPTION = gql`
+  subscription BookAdded {
+    bookAdded {
+      title
+      published
+      author {
+        name
+      }
+      genres
     }
   }
 `;

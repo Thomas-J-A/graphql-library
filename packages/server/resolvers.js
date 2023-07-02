@@ -1,6 +1,6 @@
 const { GraphQLError } = require('graphql');
 const bcrypt = require('bcryptjs');
-const { PubSub } = require('graphql-subscriptions');
+const { PubSub, withFilter } = require('graphql-subscriptions');
 
 const { generateToken } = require('./utils');
 
