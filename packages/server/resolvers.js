@@ -33,8 +33,15 @@ const resolvers = {
 
       return filteredBooks;
     },
-    allAuthors: async (_, __, { models }) =>
-      await models.Author.find({}).exec(),
+    allAuthors: async (_, __, { models }) => {
+      const authors = await models.Author.find({}).exec();
+      const books = await models.Book.find({}).exec();
+
+      return authors.map((a) => {
+        const bookCount = books.filter((b) => b.author.equals(a._id)).length;
+        return { ...a._doc, bookCount };
+      });
+    },
     me: (_, __, { user }) => user,
   },
   Mutation: {
@@ -207,15 +214,15 @@ const resolvers = {
       return author;
     },
   },
-  Author: {
-    bookCount: async (parent, args, { models }) => {
-      const books = await models.Book.find({})
-        .populate('author', 'name')
-        .exec();
+  // Author: {
+  //   bookCount: async (parent, args, { models }) => {
+  //     const books = await models.Book.find({})
+  //       .populate('author', 'name')
+  //       .exec();
 
-      return books.filter((b) => b.author.name === parent.name).length;
-    },
-  },
+  //     return books.filter((b) => b.author.name === parent.name).length;
+  //   },
+  // },
 };
 
 module.exports = resolvers;
